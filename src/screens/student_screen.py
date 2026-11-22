@@ -4,7 +4,7 @@ from src.screens.ui.base_layout import style_background_dashboard, style_base_la
 
 from src.screens.components.header import header_dashboard
 from src.screens.components.footer import footer_dashboard
-from PIL import Image
+from PIL import Image, ImageOps
 import numpy as np
 from src.screens.pipelines.face_pipeline import predict_attendance, get_face_embeddings, train_classifier
 from src.screens.pipelines.voice_pipeline import get_voice_embedding
@@ -114,13 +114,14 @@ def student_screen():
     photo_source = st.camera_input("Position your face in the center")
 
     if photo_source:
-        img = np.array(Image.open(photo_source))
+        with Image.open(photo_source) as photo:
+            img = np.array(ImageOps.exif_transpose(photo).convert("RGB"))
 
         with st.spinner('AI is scanning..'):
             detected, all_ids, num_faces = predict_attendance(img)
 
             if num_faces == 0:
-                st.warning('Face not found!')
+                st.warning("No face detected. Clear the photo and retake it facing the camera, with light on your face. Move closer so your whole face fills more of the frame.")
             elif num_faces >1:
                 st.warning('Multiple faces found')
             else:
@@ -158,7 +159,6 @@ def student_screen():
             if st.button('Create Account', type='primary'):
                 if new_name:
                     with st.spinner('Creating profile..'):
-                        img = np.array(Image.open(photo_source))
                         encodings= get_face_embeddings(img)
                         if encodings:
                             face_emb = encodings[0].tolist()
@@ -185,5 +185,4 @@ def student_screen():
 
 
         
-    #footer_dashboard() 
-    
+    #footer_dashboard()
