@@ -1,14 +1,16 @@
-﻿import streamlit as st
+from pathlib import Path
+
+import streamlit as st
+
+
+CAMPUS_PHOTO = Path(__file__).resolve().parents[2] / "assets" / "campus.jpg"
 
 
 def home_screen():
-    st.markdown("""
-<section class="landing">
-    <p>Birla Institute of Technology, Mesra</p>
-    <h1>BIT Mesra Attendance AI</h1>
-    <div>Classroom attendance using face and voice recognition, reviewed by teachers before saving.</div>
-</section>
-""", unsafe_allow_html=True)
+    with st.container(key="campus_hero"):
+        st.image(str(CAMPUS_PHOTO), width="stretch")
+        st.markdown('<h1 class="campus-title">BIT Mesra Attendance AI</h1>', unsafe_allow_html=True)
+
     students, teachers = st.columns(2, gap="medium")
     for column, role, icon, description in (
         (students, "Student", "face", "Sign in with a photo, enroll in subjects and track your attendance."),
