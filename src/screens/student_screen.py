@@ -1,9 +1,7 @@
 import streamlit as st
 
-from src.screens.ui.base_layout import style_background_dashboard, style_base_layout
 
 from src.screens.components.header import header_dashboard
-from src.screens.components.footer import footer_dashboard
 from PIL import Image, ImageOps
 import numpy as np
 from src.screens.pipelines.face_pipeline import predict_attendance, get_face_embeddings, train_classifier
@@ -84,14 +82,11 @@ def student_dashboard():
                 ],
                 footer_callback=unenroll_button
             )
-    footer_dashboard()
 
 
 def student_screen():
 
 
-    style_background_dashboard()
-    style_base_layout()
 
 
     if "student_data" in st.session_state:
@@ -185,4 +180,3 @@ def student_screen():
 
 
         
-    #footer_dashboard()

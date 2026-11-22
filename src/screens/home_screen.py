@@ -1,13 +1,11 @@
 import streamlit as st 
 
 from src.screens.components.header import header_home
-from src.screens.components.footer import footer_home
-from src.screens.ui.base_layout import style_base_layout, style_background_home
+from src.screens.ui.base_layout import style_background_home
 def home_screen():
     
     header_home()
     style_background_home()
-    style_base_layout()
     
     col1, col2 = st.columns(2, gap="large")
 
@@ -25,4 +23,3 @@ def home_screen():
             st.session_state['login_type']='teacher'
             st.rerun()
 
-    #footer_home()

@@ -1,8 +1,6 @@
 import streamlit as st
 
-from src.screens.ui.base_layout import style_background_dashboard, style_base_layout
 from src.screens.components.header import header_dashboard
-from src.screens.components.footer import footer_dashboard
 from src.screens.components.subject_card import subject_card
 from src.screens.database.db import check_teacher_exists, create_teacher, teacher_login, get_teacher_subjects, get_attendance_for_teacher
 from src.screens.components.dialog_create_subject import create_subject_dialog
@@ -23,8 +21,6 @@ from src.screens.database.config import supabase
 from src.screens.components.dialog_voice_attendance import voice_attendance_dialog
 def teacher_screen():
 
-    style_background_dashboard()
-    style_base_layout()
 
     if "teacher_data" in st.session_state:
         teacher_dashboard()
@@ -88,7 +84,6 @@ def teacher_dashboard():
     
 
 
-    footer_dashboard()
 
 def teacher_tab_take_attendance():
     teacher_id = st.session_state.teacher_data['teacher_id']
@@ -333,7 +328,6 @@ def teacher_screen_login():
         if st.button('Register Instead', type="primary", icon=':material/passkey:', width='stretch'):
             st.session_state.teacher_login_type = 'register'
 
-    footer_dashboard()
 
 
 
@@ -398,4 +392,3 @@ def teacher_screen_register():
         if st.button('Login Instead', type="primary", icon=':material/passkey:', width='stretch'):
             st.session_state.teacher_login_type = 'login'
 
-    #footer_dashboard()
