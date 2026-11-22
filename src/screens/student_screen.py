@@ -58,8 +58,9 @@ def student_dashboard():
 
 
     cols = st.columns(2)
-    for i, sub_node in enumerate(subjects):
-        sub = sub_node['subjects']
+    # A course can appear more than once in older enrollment records.
+    courses = {row['subjects']['subject_id']: row['subjects'] for row in subjects}
+    for i, sub in enumerate(courses.values()):
         sid = sub['subject_id']
 
 
