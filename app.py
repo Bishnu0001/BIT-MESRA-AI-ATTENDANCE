@@ -5,6 +5,7 @@ from src.screens.teacher_screen import teacher_screen
 from src.screens.student_screen import student_screen 
 
 
+from src.screens.components.header import masthead
 from src.screens.components.footer import creator_credit
 from src.screens.ui.base_layout import style_base_layout
 
@@ -18,6 +19,7 @@ def main():
         st.session_state['login_type'] = None
 
     style_base_layout()
+    masthead()
     match st.session_state['login_type']:
         case 'teacher':
             teacher_screen()
