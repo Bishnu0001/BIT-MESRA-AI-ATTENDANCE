@@ -1,9 +1,7 @@
-from pathlib import Path
-
 import streamlit as st
 
 
-CAMPUS_PHOTO = Path(__file__).resolve().parents[2] / "assets" / "campus.jpg"
+from src.screens.ui.base_layout import CAMPUS_PHOTO
 
 
 def home_screen():

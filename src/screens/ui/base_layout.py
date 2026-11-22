@@ -1,4 +1,22 @@
+from base64 import b64encode
+from pathlib import Path
+
 import streamlit as st
+
+
+CAMPUS_PHOTO = Path(__file__).resolve().parents[3] / "assets" / "campus.jpg"
+
+
+def style_portal_background():
+    photo = b64encode(CAMPUS_PHOTO.read_bytes()).decode("ascii")
+    st.markdown(f"""
+<style>
+.stApp {{
+    background: linear-gradient(rgba(245, 248, 255, .82), rgba(245, 248, 255, .92)),
+        url("data:image/jpeg;base64,{photo}") center 50% / cover no-repeat fixed;
+}}
+</style>
+""", unsafe_allow_html=True)
 
 
 def style_base_layout():

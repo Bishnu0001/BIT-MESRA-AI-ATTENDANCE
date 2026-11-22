@@ -7,7 +7,7 @@ from src.screens.student_screen import student_screen
 
 from src.screens.components.header import LOGO, masthead
 from src.screens.components.footer import creator_credit
-from src.screens.ui.base_layout import style_base_layout
+from src.screens.ui.base_layout import style_base_layout, style_portal_background
 
 
 def main():
@@ -19,6 +19,8 @@ def main():
         st.session_state['login_type'] = None
 
     style_base_layout()
+    if st.session_state.login_type in ('teacher', 'student'):
+        style_portal_background()
     masthead()
     match st.session_state['login_type']:
         case 'teacher':
