@@ -11,7 +11,6 @@ def masthead():
     with st.container(horizontal=True, vertical_alignment="center", key="site_header"):
         st.image(str(LOGO), width=74)
         st.markdown(f"**BIT Mesra Attendance AI**  \n{section}")
-    st.divider()
 
 
 def header_dashboard():

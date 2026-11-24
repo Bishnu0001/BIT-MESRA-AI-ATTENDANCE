@@ -1,0 +1,153 @@
+.stApp {
+    --ink: #152742;
+    --muted: #485b72;
+    --paper: #fff;
+    --line: #d8e2ed;
+    --accent: #a32139;
+    background: #f4f7fb;
+    color: var(--ink);
+}
+
+[data-testid="stMain"] > .block-container {
+    max-width: 74rem;
+    padding: 3.75rem clamp(1rem, 4vw, 3.5rem) 2rem;
+}
+
+[data-testid="stHeader"] { background: transparent; }
+
+.st-key-site_header {
+    position: relative;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    isolation: isolate;
+    padding: .8rem clamp(.85rem, 3vw, 1.5rem);
+    min-height: 5.5rem;
+    color: var(--ink);
+    background: var(--paper);
+    animation: panel-enter .4s ease-out both;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+}
+
+.st-key-site_header::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 34%;
+    background:
+        linear-gradient(90deg, white 0%, rgba(255,255,255,.92) 29%, rgba(255,255,255,.12) 100%),
+        var(--campus-photo, none) center 52% / cover no-repeat;
+}
+
+.st-key-site_header [data-testid="stImage"] img {
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+}
+
+.st-key-site_header p { margin: 0; color: var(--ink); }
+.st-key-site_header strong { font-size: clamp(1rem, 2.5vw, 1.22rem); }
+
+.campus-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 1.25rem;
+    margin-bottom: clamp(.35rem, 1.6vw, 1.15rem);
+    box-shadow: 0 14px 38px #162a4324;
+    animation: panel-enter .55s ease-out both;
+}
+
+.campus-hero img {
+    display: block;
+    width: 100%;
+    height: clamp(17rem, 34vw, 28rem);
+    object-fit: cover;
+    object-position: center 61%;
+}
+
+.campus-hero h1.campus-title {
+    position: absolute;
+    inset: 0;
+    align-content: end;
+    margin: 0;
+    padding: clamp(1.35rem, 5vw, 3.5rem);
+    background: linear-gradient(0deg, #0d1930ef, #16254165 40%, transparent 72%);
+    color: white;
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    line-height: .98;
+    letter-spacing: -.045em;
+}
+
+.st-key-entry_teacher, .st-key-entry_student, .st-key-access_panel {
+    padding: clamp(1rem, 3vw, 1.8rem);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--paper);
+    box-shadow: 0 6px 24px #172f580c;
+    animation: panel-enter .45s ease-out both;
+}
+
+.st-key-entry_teacher { animation-delay: .08s; }
+
+.st-key-entry_student, .st-key-entry_teacher {
+    height: 100%;
+    border-top: 4px solid var(--accent);
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.st-key-entry_student { border-top-color: #244d7e; }
+.st-key-access_panel { max-width: 46rem; margin-inline: auto; }
+[data-testid="stMain"] :is(h1, h2, h3):not(.campus-title) { letter-spacing: -.035em; }
+[data-testid="stMain"] [data-testid="stButton"] button {
+    min-height: 2.75rem;
+    border-radius: .65rem;
+    transition: transform .18s, box-shadow .18s;
+}
+
+[data-testid="stButton"] button:focus-visible { outline: 2px solid #1d569b; outline-offset: 3px; }
+
+.creator-credit {
+    color: var(--muted);
+    margin: clamp(1.5rem, 5vw, 3rem) auto 0;
+    border-top: 1px solid var(--line);
+    padding: 1rem;
+    text-align: center;
+    font-size: .92rem;
+    max-width: 34rem;
+}
+
+@keyframes panel-enter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (hover: hover) {
+    .st-key-entry_student:hover, .st-key-entry_teacher:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px #172f581a;
+    }
+    [data-testid="stButton"] button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px #172f581c;
+    }
+}
+
+@media (max-width: 640px) {
+    [data-testid="stMain"] > .block-container { padding-top: 3.25rem; }
+    .st-key-site_header { min-height: 4.5rem; }
+    .st-key-site_header::before { inset-inline-start: 40%; background-position: center, 37% 52%; }
+    .st-key-site_header [data-testid="stImage"] img { width: 50px; }
+    .campus-hero img { object-position: 33% 63%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .st-key-site_header, .campus-hero, .st-key-entry_teacher, .st-key-entry_student, .st-key-access_panel {
+        animation: none;
+    }
+    .st-key-entry_teacher, .st-key-entry_student, [data-testid="stMain"] [data-testid="stButton"] button {
+        transition: none;
+        transform: none !important;
+    }
+}

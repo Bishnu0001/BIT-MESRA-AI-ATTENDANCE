@@ -1,24 +1,29 @@
 import streamlit as st
 
-
-from src.screens.ui.base_layout import CAMPUS_PHOTO
+from src.screens.ui.base_layout import campus_photo
 
 
 def home_screen():
-    with st.container(key="campus_hero"):
-        st.image(str(CAMPUS_PHOTO), width="stretch")
-        st.markdown('<h1 class="campus-title">BIT Mesra Attendance AI</h1>', unsafe_allow_html=True)
+    st.html(f"""
+        <section class="campus-hero" aria-labelledby="campus-title">
+            <img src="{campus_photo("campus-evening.jpg")}" alt="BIT Mesra campus at dusk">
+            <h1 class="campus-title" id="campus-title">BIT Mesra<br>Attendance AI</h1>
+        </section>
+    """)
 
     students, teachers = st.columns(2, gap="medium")
     for column, role, icon, description in (
-        (students, "Student", "face", "Sign in with a photo, enroll in subjects and track your attendance."),
-        (teachers, "Teacher", "co_present", "Manage subjects, capture classroom attendance and review each session."),
+        (students, "Student", "school", "Sign in, enroll in subjects and check your attendance."),
+        (teachers, "Teacher", "co_present", "Manage subjects, take attendance and review class records."),
     ):
         with column, st.container(border=True, key=f"entry_{role.lower()}"):
-            st.badge(f"{role} access", icon=f":material/{icon}:", color="blue")
             st.subheader(f"{role} Portal")
             st.write(description)
-            st.divider()
-            if st.button(f"Open {role} Portal", icon=":material/arrow_forward:", icon_position="right", type="primary"):
+            if st.button(
+                f"Open {role} Portal",
+                icon=f":material/{icon}:",
+                type="primary",
+                width="stretch",
+            ):
                 st.session_state.login_type = role.lower()
                 st.rerun()
